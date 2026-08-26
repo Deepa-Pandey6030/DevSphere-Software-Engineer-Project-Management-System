@@ -1,0 +1,23 @@
+services:
+  db:
+    container_name: postgres-spring-boot-demo1
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: demo1
+      POSTGRES_USER: software-engineer-demo1
+      POSTGRES_PASSWORD: 1234
+      PGDATA: /data/postgres
+    volumes:
+      - db:/data/postgres
+    ports:
+      - "5332:5432"
+    networks:
+      - db
+    restart: unless-stopped
+
+networks:
+  db:
+    driver: bridge
+
+volumes:
+  db:
