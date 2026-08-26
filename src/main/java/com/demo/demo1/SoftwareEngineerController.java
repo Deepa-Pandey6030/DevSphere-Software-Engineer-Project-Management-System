@@ -54,8 +54,11 @@ public class SoftwareEngineerController {
     }
 
     @PutMapping("/{id}")
-    public SoftwareEngineer updateRngineerById(@PathVariable Integer id,@RequestBody SoftwareEngineer updatedEngineer){
-        return softwareEngineerService.updateSoftwareEngineerById(id,updatedEngineer);
+    public ResponseEntity<SoftwareEngineerResponseDTO> updateRngineerById(@PathVariable Integer id,@RequestBody SoftwareEngineerCreateDTO request){
+        SoftwareEngineerResponseDTO savedResponseDTO=softwareEngineerService.updateSoftwareEngineerById(id,request);
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(savedResponseDTO);
     }
     
 }

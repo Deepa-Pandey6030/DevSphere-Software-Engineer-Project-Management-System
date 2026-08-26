@@ -12,29 +12,16 @@ private final SoftwareEngineerRepository softwareEngineerRepository;
 public SoftwareEngineerService(SoftwareEngineerRepository softwareEngineerRepository) {
     this.softwareEngineerRepository = softwareEngineerRepository;
 }
-public List<SoftwareEngineer> getAllSoftwareEngineers(){
-    return softwareEngineerRepository.findAll();
-}
+
 
 public SoftwareEngineerResponseDTO addSoftwareEngineer(SoftwareEngineerCreateDTO dto){
     SoftwareEngineer engineer=new SoftwareEngineer();
     engineer.setName(dto.getName());
     engineer.setTechstack(dto.getTechstack());
+    softwareEngineerRepository.save(engineer);
     SoftwareEngineerResponseDTO responseDTO=new SoftwareEngineerResponseDTO();
     responseDTO.setName(dto.getName());
     responseDTO.setTechstack(dto.getTechstack());
-    return responseDTO;
-}
-
-public SoftwareEngineer getSoftwareEngineerById(Integer id){
-    return softwareEngineerRepository.findById(id).orElseThrow(()->new SoftwareEngineerNotFoundException("Software Engineer not found with "+id));
-}
-
-public SoftwareEngineerResponseDTO SoftwareEngineerResponseDTOById(Integer id){
-    SoftwareEngineer engineer=getSoftwareEngineerById(id);
-    SoftwareEngineerResponseDTO responseDTO=new SoftwareEngineerResponseDTO();
-    responseDTO.setName(engineer.getName());
-    responseDTO.setTechstack(engineer.getTechstack());
     return responseDTO;
 }
 
@@ -51,16 +38,37 @@ public List<SoftwareEngineerResponseDTO> SoftwareEngineerResponseDTOAll(){
     return responseDTOs;
 }
 
+public SoftwareEngineerResponseDTO SoftwareEngineerResponseDTOById(Integer id){
+    SoftwareEngineer engineer=getSoftwareEngineerById(id);
+    SoftwareEngineerResponseDTO responseDTO=new SoftwareEngineerResponseDTO();
+    responseDTO.setName(engineer.getName());
+    responseDTO.setTechstack(engineer.getTechstack());
+    return responseDTO;
+}
+
+
+public List<SoftwareEngineer> getAllSoftwareEngineers(){
+    return softwareEngineerRepository.findAll();
+}
+
+public SoftwareEngineer getSoftwareEngineerById(Integer id){
+    return softwareEngineerRepository.findById(id).orElseThrow(()->new SoftwareEngineerNotFoundException("Software Engineer not found with "+id));
+}
+
 public void deleteSoftwareEngineerById(Integer id){
     softwareEngineerRepository.findById(id).orElseThrow(()->new SoftwareEngineerNotFoundException("Software Engineer not found with "+id));
     softwareEngineerRepository.deleteById(id);
 }
 
-public SoftwareEngineer updateSoftwareEngineerById(Integer id,SoftwareEngineer updatedEngineer){
+public SoftwareEngineerResponseDTO updateSoftwareEngineerById(Integer id,SoftwareEngineerCreateDTO dto){
     SoftwareEngineer existingSoftwareEngineer=softwareEngineerRepository.findById(id).orElseThrow(()->new SoftwareEngineerNotFoundException ("Software Engineer not found with "+id));
-    existingSoftwareEngineer.setName(updatedEngineer.name);
-    existingSoftwareEngineer.setTechstack(updatedEngineer.techstack);
-    return softwareEngineerRepository.save(existingSoftwareEngineer);
+    existingSoftwareEngineer.setName(dto.getName());
+    existingSoftwareEngineer.setTechstack(dto.getTechstack());
+    softwareEngineerRepository.save(existingSoftwareEngineer);
+    SoftwareEngineerResponseDTO engineer=new SoftwareEngineerResponseDTO();
+    engineer.setName(existingSoftwareEngineer.getName());
+    engineer.setTechstack(existingSoftwareEngineer.getTechstack());
+    return engineer;
 }
 
 
