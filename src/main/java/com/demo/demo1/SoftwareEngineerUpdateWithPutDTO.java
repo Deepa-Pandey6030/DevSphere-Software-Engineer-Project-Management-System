@@ -11,7 +11,7 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public class SoftwareEngineerCreateDTO {
+public class SoftwareEngineerUpdateWithPutDTO {
     @NotBlank(message="First name is required")
     private String firstName;
 
@@ -86,3 +86,4 @@ public class SoftwareEngineerCreateDTO {
     }
    
 }
+
