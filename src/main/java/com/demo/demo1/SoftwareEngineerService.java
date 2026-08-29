@@ -75,5 +75,16 @@ public SoftwareEngineerResponseDTO updateSoftwareEngineerWithPatch(Integer id,So
     return responseDTO;
 }
 
+public SoftwareEngineerResponseDTO SoftwareEngineerResponseDTOByEmialId(String email){
+    SoftwareEngineer engineer=softwareEngineerRepository.findByEmail(email).orElseThrow(()->new SoftwareEngineerNotFoundException ("Software Engineer not found with "+email));
+    SoftwareEngineerResponseDTO responseDTO=softwareEngineerMapper.toResponseDTO(engineer);
+    return responseDTO;
+}
+
+public SoftwareEngineerResponseDTO SoftwareEngineerResponseDTOByFirstName(String firstName){
+    SoftwareEngineer engineer=softwareEngineerRepository.findByFirstName(firstName).orElseThrow(()->new SoftwareEngineerNotFoundException ("Software Engineer not found with "+firstName));
+    SoftwareEngineerResponseDTO responseDTO=softwareEngineerMapper.toResponseDTO(engineer);
+    return responseDTO;
+}
 
 }

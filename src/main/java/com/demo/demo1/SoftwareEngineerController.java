@@ -64,9 +64,24 @@ public class SoftwareEngineerController {
             .body(savedResponseDTO);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/id/{id}")
     public ResponseEntity<SoftwareEngineerResponseDTO> updateEngineerwithPatch(@PathVariable Integer id,@Valid @RequestBody SoftwareEngineerUpdateWithPatchDTO request){
         SoftwareEngineerResponseDTO savedResponseDTO=softwareEngineerService.updateSoftwareEngineerWithPatch(id,request);
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(savedResponseDTO);
+    }
+    @GetMapping("/email/{email}")
+    public ResponseEntity<SoftwareEngineerResponseDTO> getEngineerByEmailId(@PathVariable String email){
+        SoftwareEngineerResponseDTO savedResponseDTO=softwareEngineerService.SoftwareEngineerResponseDTOByEmialId(email);
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(savedResponseDTO);
+    }
+
+    @GetMapping("/firstName/{firstName}")
+    public ResponseEntity<SoftwareEngineerResponseDTO> getEngineerByfirstName(@PathVariable String firstName){
+        SoftwareEngineerResponseDTO savedResponseDTO=softwareEngineerService.SoftwareEngineerResponseDTOByEmialId(firstName);
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(savedResponseDTO);

@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class GlobalExceptionHndling{
+public class GlobalExceptionHandling{
     
     @ExceptionHandler(SoftwareEngineerNotFoundException.class)
-    public ResponseEntity<String>handleSoftwareEngineerNotFound(SoftwareEngineerNotFoundException exception){
+    public ResponseEntity<String>handleSoftwareEngineerNotFou(SoftwareEngineerNotFoundException exception){
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(exception.getMessage());
