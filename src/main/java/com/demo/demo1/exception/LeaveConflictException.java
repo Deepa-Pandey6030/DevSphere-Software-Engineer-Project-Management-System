@@ -1,0 +1,8 @@
+package com.demo.demo1.exception;
+
+public class LeaveConflictException extends RuntimeException {
+
+    public LeaveConflictException(String message) {
+        super(message);
+    }
+}
